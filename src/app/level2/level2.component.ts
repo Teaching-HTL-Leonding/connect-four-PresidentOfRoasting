@@ -13,31 +13,33 @@ export class Level2Component {
 
   private currentWinnerIx = 0;
 
-  constructor(){
+  constructor() {
     this.restart();
   }
 
-  public  get winnerIndex():number{
+  public get winnerIndex(): number {
     return this.currentWinnerIx;
   }
 
   public drop(colIx: number) {
-    if(!this.currentWinnerIx){
+    if (!this.currentWinnerIx) {
       let freeRow = this.getFreeRow(colIx);
-      if(freeRow !== -1){
-
-        this.boardContent[freeRow][colIx]=this.currentPlayerIndex;
+      if (freeRow !== -1) {
+        this.boardContent[freeRow][colIx] = this.currentPlayerIndex;
 
         this.currentWinnerIx = this.getWinnerIndex();
-        this.currentPlayerIndex = this.currentPlayerIndex === 1?2:1;
+        this.currentPlayerIndex = this.currentPlayerIndex === 1 ? 2 : 1;
       }
     }
   }
 
-  private getFreeRow(colIx: number):number{
+  private getFreeRow(colIx: number): number {
     for (let index = 0; index < 4; index++) {
       if (!this.boardContent[index][colIx]) {
-        if (index === 3||(index+1<4&&this.boardContent[index+1][colIx]!==0)) {
+        if (
+          index === 3 ||
+          (index + 1 < 4 && this.boardContent[index + 1][colIx] !== 0)
+        ) {
           return index;
         }
       }
@@ -45,19 +47,18 @@ export class Level2Component {
     return -1;
   }
 
-  public restart():void{
-    this.currentWinnerIx=0;
-    this.boardContent=[
-      [0,0,0,0],
-      [0,0,0,0],
-      [0,0,0,0],
-      [0,0,0,0]
-    ]
-    this.currentPlayerIndex=1;
+  public restart(): void {
+    this.currentWinnerIx = 0;
+    this.boardContent = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ];
+    this.currentPlayerIndex = 1;
   }
 
-
-  public getStyle(rowIX:number,colIX:number){
+  public getStyle(rowIX: number, colIX: number) {
     return this.playerIndexToClass(this.boardContent[rowIX][colIX]);
   }
 
@@ -69,22 +70,42 @@ export class Level2Component {
     return '';
   }
 
-  private getWinnerIndex(): number{
+  private getWinnerIndex(): number {
     for (let i = 0; i < 4; i++) {
-      if (this.boardContent[i][0]!==0&&this.boardContent[i][0]===this.boardContent[i][1]&&this.boardContent[i][0]===this.boardContent[i][2]&&this.boardContent[i][0]===this.boardContent[i][3]) {
+      if (
+        this.boardContent[i][0] !== 0 &&
+        this.boardContent[i][0] === this.boardContent[i][1] &&
+        this.boardContent[i][0] === this.boardContent[i][2] &&
+        this.boardContent[i][0] === this.boardContent[i][3]
+      ) {
         return this.currentPlayerIndex;
       }
 
-      if (this.boardContent[0][i]!==0&&this.boardContent[0][i]===this.boardContent[1][i]&&this.boardContent[0][i]===this.boardContent[2][i]&&this.boardContent[0][i]===this.boardContent[3][i]) {
+      if (
+        this.boardContent[0][i] !== 0 &&
+        this.boardContent[0][i] === this.boardContent[1][i] &&
+        this.boardContent[0][i] === this.boardContent[2][i] &&
+        this.boardContent[0][i] === this.boardContent[3][i]
+      ) {
         return this.currentPlayerIndex;
       }
     }
 
-    if (this.boardContent[0][0]!==0&&this.boardContent[0][0]===this.boardContent[1][1]&&this.boardContent[0][0]===this.boardContent[2][2]&&this.boardContent[0][0]===this.boardContent[3][3]) {
+    if (
+      this.boardContent[0][0] !== 0 &&
+      this.boardContent[0][0] === this.boardContent[1][1] &&
+      this.boardContent[0][0] === this.boardContent[2][2] &&
+      this.boardContent[0][0] === this.boardContent[3][3]
+    ) {
       return this.currentPlayerIndex;
     }
 
-    if (this.boardContent[0][3]!==0&&this.boardContent[0][3]===this.boardContent[1][2]&&this.boardContent[0][3]===this.boardContent[2][1]&&this.boardContent[0][3]===this.boardContent[3][0]) {
+    if (
+      this.boardContent[0][3] !== 0 &&
+      this.boardContent[0][3] === this.boardContent[1][2] &&
+      this.boardContent[0][3] === this.boardContent[2][1] &&
+      this.boardContent[0][3] === this.boardContent[3][0]
+    ) {
       return this.currentPlayerIndex;
     }
 
