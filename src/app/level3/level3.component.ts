@@ -36,7 +36,7 @@ export class Level3Component extends Level2Component {
   }
 
   protected override getWinnerIndex(): number {
-    //check for horizontal win
+    //horizontal
     for (let i = 0; i < this.boardContent.length; i++) {
       for (let j = 0; j < this.boardContent[i].length - 3; j++) {
         if (
@@ -50,7 +50,7 @@ export class Level3Component extends Level2Component {
       }
     }
 
-    //check for vertical win
+    //vertical
     for (let i = 0; i < this.boardContent.length - 3; i++) {
       for (let j = 0; j < this.boardContent[i].length; j++) {
         if (
@@ -64,7 +64,7 @@ export class Level3Component extends Level2Component {
       }
     }
 
-    //check for left to right diagonal win on a 7x6 board
+    //left to right
     for (let i = 0; i < this.boardContent.length - 3; i++) {
       console.log(this.boardContent);
       for (let j = 0; j < this.boardContent[i].length - 3; j++) {
@@ -79,7 +79,7 @@ export class Level3Component extends Level2Component {
       }
     }
 
-    //check for right to left diagonal win on a 7x6 board
+    //right to left
     for (let i = 0; i < this.boardContent.length - 3; i++) {
       for (let j = 3; j < this.boardContent[i].length; j++) {
         if (
