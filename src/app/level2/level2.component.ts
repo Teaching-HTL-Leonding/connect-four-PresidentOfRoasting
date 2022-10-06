@@ -34,11 +34,11 @@ export class Level2Component {
   }
 
   private getFreeRow(colIx: number): number {
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < this.boardContent.length; index++) {
       if (!this.boardContent[index][colIx]) {
         if (
-          index === 3 ||
-          (index + 1 < 4 && this.boardContent[index + 1][colIx] !== 0)
+          index === this.boardContent.length -1 ||
+          (index + 1 < this.boardContent[index].length && this.boardContent[index + 1][colIx] !== 0)
         ) {
           return index;
         }
@@ -70,7 +70,7 @@ export class Level2Component {
     return '';
   }
 
-  private getWinnerIndex(): number {
+  protected getWinnerIndex(): number {
     for (let i = 0; i < 4; i++) {
       if (
         this.boardContent[i][0] !== 0 &&

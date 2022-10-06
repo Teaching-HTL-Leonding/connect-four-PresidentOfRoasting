@@ -1,11 +1,98 @@
 import { Component } from '@angular/core';
+import { Level2Component } from '../level2/level2.component';
+
+export interface BoardCell {
+  /**
+   * Player (X or O) occupying the cell, empty string if the cell is empty.
+   */
+  playerName: string;
+
+  /**
+   * CSS class of the player occupying the cell, empty string if the cell is empty.
+   */
+  class: string;
+}
 
 @Component({
   templateUrl: './level3.component.html',
   styleUrls: ['./level3.component.css'],
 })
-export class Level3Component {
-  // TODO: Complete this class by adding the appropriate code.
-  // Try to avoid copying the code from level 2. Find a different solution
-  // for reusing the existing logic.
+export class Level3Component extends Level2Component {
+  constructor() {
+    super();
+    this.restart();
+  }
+
+  public override restart(): void {
+    super.restart();
+    this.boardContent = [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+    ];
+  }
+
+  protected override getWinnerIndex(): number {
+    //check for horizontal win
+    for (let i = 0; i < this.boardContent.length; i++) {
+      for (let j = 0; j < this.boardContent[i].length - 3; j++) {
+        if (
+          this.boardContent[i][j] !== 0 &&
+          this.boardContent[i][j] === this.boardContent[i][j + 1] &&
+          this.boardContent[i][j] === this.boardContent[i][j + 2] &&
+          this.boardContent[i][j] === this.boardContent[i][j + 3]
+        ) {
+          return this.boardContent[i][j];
+        }
+      }
+    }
+
+    //check for vertical win
+    for (let i = 0; i < this.boardContent.length - 3; i++) {
+      for (let j = 0; j < this.boardContent[i].length; j++) {
+        if (
+          this.boardContent[i][j] !== 0 &&
+          this.boardContent[i][j] === this.boardContent[i + 1][j] &&
+          this.boardContent[i][j] === this.boardContent[i + 2][j] &&
+          this.boardContent[i][j] === this.boardContent[i + 3][j]
+        ) {
+          return this.boardContent[i][j];
+        }
+      }
+    }
+
+    //check for left to right diagonal win on a 7x6 board
+    for (let i = 0; i < this.boardContent.length - 3; i++) {
+      console.log(this.boardContent);
+      for (let j = 0; j < this.boardContent[i].length - 3; j++) {
+        if (
+          this.boardContent[i][j] !== 0 &&
+          this.boardContent[i][j] === this.boardContent[i + 1][j + 1] &&
+          this.boardContent[i][j] === this.boardContent[i + 2][j + 2] &&
+          this.boardContent[i][j] === this.boardContent[i + 3][j + 3]
+        ) {
+          return this.boardContent[i][j];
+        }
+      }
+    }
+
+    //check for right to left diagonal win on a 7x6 board
+    for (let i = 0; i < this.boardContent.length - 3; i++) {
+      for (let j = 3; j < this.boardContent[i].length; j++) {
+        if (
+          this.boardContent[i][j] !== 0 &&
+          this.boardContent[i][j] === this.boardContent[i + 1][j - 1] &&
+          this.boardContent[i][j] === this.boardContent[i + 2][j - 2] &&
+          this.boardContent[i][j] === this.boardContent[i + 3][j - 3]
+        ) {
+          return this.boardContent[i][j];
+        }
+      }
+    }
+
+    return 0;
+  }
 }
