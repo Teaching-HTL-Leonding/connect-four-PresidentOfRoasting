@@ -37,8 +37,9 @@ export class Level2Component {
     for (let index = 0; index < this.boardContent.length; index++) {
       if (!this.boardContent[index][colIx]) {
         if (
-          index === this.boardContent.length -1 ||
-          (index + 1 < this.boardContent[index].length && this.boardContent[index + 1][colIx] !== 0)
+          index === this.boardContent.length - 1 ||
+          (index + 1 < this.boardContent[index].length &&
+            this.boardContent[index + 1][colIx] !== 0)
         ) {
           return index;
         }

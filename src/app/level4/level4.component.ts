@@ -6,7 +6,43 @@ import { BoardService } from './board.service';
   styleUrls: ['./level4.component.css'],
 })
 export class Level4Component {
-  constructor(private board: BoardService) {}
+  private currentWinnerIx = 0;
+  public currentPlayerIndex = 1;
+
+  public get winnerIndex(): number {
+    return this.board.currentPlayerIndex;
+  }
+
+  public getWinningPlayerName(): string {
+    return this.board.getWinningPlayerName();
+  }
+
+  boardContent: number[][];
+  constructor(private board: BoardService) {
+    this.boardContent = this.board.boardContent
+  }
+
+  public getStyle(rowIX: number, colIX: number) {
+    return this.board.getStyle(rowIX,colIX);
+  }
+
+  public restart(): void {
+    this.board.restart();
+  }
+
+  public drop(colIx: number) {
+    if (!this.board.winnerIndex) {
+      let freeRow = this.board.getFreeRow(colIx);
+      if (freeRow !== -1) {
+        this.boardContent[freeRow][colIx] = this.board.currentPlayerIndex;
+
+        this.board.winnerIndex = this.board.getWinnerIndex();
+        this.board.currentPlayerIndex = this.board.currentPlayerIndex === 1 ? 2 : 1;
+      }
+    }
+  }
+
+
 
   // TODO: Enhance solution from level 3 by extracting the logic in a separate Angular service.
 }
