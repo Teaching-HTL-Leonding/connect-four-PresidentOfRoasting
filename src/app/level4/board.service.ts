@@ -12,14 +12,7 @@ export class BoardService {
   public currentPlayerIndex = 1;
   private playerNames = ['', 'X', 'O'];
 
-  boardContent = [
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-  ];
+  boardContent!:number[][];
 
   public get winnerIndex(): number {
     return this.currentWinnerIx;

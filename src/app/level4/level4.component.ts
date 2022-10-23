@@ -6,28 +6,17 @@ import { BoardService } from './board.service';
   styleUrls: ['./level4.component.css'],
 })
 export class Level4Component {
-  private currentWinnerIx = 0;
   public currentPlayerIndex = 1;
 
-  public get winnerIndex(): number {
-    return this.board.currentPlayerIndex;
-  }
-
-  public getWinningPlayerName(): string {
-    return this.board.getWinningPlayerName();
-  }
-
-  boardContent: number[][];
-  constructor(private board: BoardService) {
+  boardContent!: number[][];
+  constructor(public board: BoardService) {
     this.boardContent = this.board.boardContent
-  }
-
-  public getStyle(rowIX: number, colIX: number) {
-    return this.board.getStyle(rowIX,colIX);
   }
 
   public restart(): void {
     this.board.restart();
+    this.boardContent=this.board.boardContent
+    this.currentPlayerIndex=1;
   }
 
   public drop(colIx: number) {

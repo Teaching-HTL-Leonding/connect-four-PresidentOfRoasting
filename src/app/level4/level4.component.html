@@ -14,18 +14,18 @@
         <app-column-indicator
           [columnIndex]="i"
           (drop)="drop($event)"
-          [playerIndex]="currentPlayerIndex"
+          [playerIndex]="this.board.currentPlayerIndex"
         ></app-column-indicator>
       </td>
     </tr>
     <tr *ngFor="let row of boardContent; let rowIx = index">
       <td *ngFor="let column of row; let colIx = index">
-        <div class="coin" [class]="getStyle(rowIx, colIx)"></div>
+        <div class="coin" [class]="this.board.getStyle(rowIx, colIx)"></div>
       </td>
     </tr>
   </tbody>
 </table>
 
-<h2 [hidden]="winnerIndex === 0">The winner is {{ getWinningPlayerName() }}</h2>
+<h2 [hidden]="this.board.winnerIndex === 0">The winner is {{ this.board.getWinningPlayerName() }}</h2>
 
 <button (click)="restart()">Restart</button>
