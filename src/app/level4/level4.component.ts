@@ -10,7 +10,7 @@ export class Level4Component {
 
   boardContent!: number[][];
   constructor(public board: BoardService) {
-    this.boardContent = this.board.boardContent
+    this.restart();
   }
 
   public restart(): void {

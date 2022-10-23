@@ -1,5 +1,28 @@
-<h1>Level 5</h1>
+<table class="connect-four-board">
+  <tbody>
+    <tr>
+      <td
+        *ngFor="let column of boardContent[0]; let i = index"
+        class="indicator"
+      >
+        <app-column-indicator
+          [columnIndex]="i"
+          (drop)="drop($event)"
+          [playerIndex]="this.board.currentPlayerIndex"
+        ></app-column-indicator>
+      </td>
+    </tr>
+    <tr *ngFor="let row of boardContent; let rowIx = index">
+      <td *ngFor="let column of row; let colIx = index">
+        <div class="coin" [class]="this.board.getStyle(rowIx, colIx)"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
+<h2 [hidden]="this.board.winnerIndex === 0">The winner is {{ this.board.winnerIndex|playerName}}</h2>
+
+<button (click)="restart()">Restart</button>
 <!--
   TODO: Enhance solution from level 4 by using Angular pipes
 -->
